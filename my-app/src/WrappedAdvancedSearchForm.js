@@ -1,5 +1,7 @@
-import {Form, Input, Col, Row, Button} from 'antd';
+import {Form, Input, Col, Row, Button, notification} from 'antd';
 import {useState} from "react";
+import axios from "axios"
+import {SmileOutlined} from '@ant-design/icons';
 
 const WrappedAdvancedSearchForm = () => {
     const [formValueA, setFormValueA] = useState({});
@@ -7,6 +9,19 @@ const WrappedAdvancedSearchForm = () => {
     const [formValueC, setFormValueC] = useState({});
     const [form] = Form.useForm();
 
+    const saveDigits = () => {
+        const request = []
+        request.push(formValueA)
+        request.push(formValueB)
+        request.push(formValueC)
+        axios.post("http://localhost:8080/digit/new", request).then(() => {
+            notification.open({
+                message: 'Success',
+                icon: <SmileOutlined style={{color: '#108ee9'}}/>,
+                duration: 1
+            })
+        })
+    }
     return (
         <Form form={form}
               className="ant-advanced-search-form">
@@ -44,7 +59,7 @@ const WrappedAdvancedSearchForm = () => {
             </Row>
             <Row>
                 <Col span={24} style={{textAlign: 'right'}}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={saveDigits}>
                         Calculate
                     </Button>
                     <Button
