@@ -42,7 +42,7 @@ const WrappedAdvancedSearchForm = () => {
                                 message: 'Input digits!',
                             },
                         ]}>
-                        <Input placeholder="placeholder" onChange={(event) => {
+                        <Input type={"number"} placeholder="placeholder" onChange={(event) => {
                             setFormValueA({
                                 nameOfDigit: "A",
                                 digit: event.target.value
@@ -60,7 +60,7 @@ const WrappedAdvancedSearchForm = () => {
                                 message: 'Input digits!',
                             },
                         ]}>
-                        < Input placeholder="placeholder" onChange={(event) => {
+                        < Input type={"number"} placeholder="placeholder" onChange={(event) => {
                             setFormValueB({
                                 nameOfDigit: "B",
                                 digit: event.target.value
@@ -78,7 +78,7 @@ const WrappedAdvancedSearchForm = () => {
                                 message: 'Input digits!',
                             },
                         ]}>
-                        <Input placeholder="placeholder" onChange={(event) => {
+                        <Input type={"number"} placeholder="placeholder" onChange={(event) => {
                             setFormValueC({
                                 nameOfDigit: "C",
                                 digit: event.target.value
