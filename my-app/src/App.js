@@ -1,5 +1,6 @@
 import WrappedAdvancedSearchForm from "./WrappedAdvancedSearchForm";
 import "./App.css";
+import SearchResult from "./SearchResult";
 
 function App() {
     return (
