@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DigitRepository extends JpaRepository<Digits, Long> {
 
-    Digits findByDigit(Double value);
+    Digits findByNameOfDigit(String nameOfDigit);
 }

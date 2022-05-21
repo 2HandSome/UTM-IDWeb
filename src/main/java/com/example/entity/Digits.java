@@ -14,6 +14,7 @@ public class Digits {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    private String nameOfDigit;
     private Double digit;
     private Double digitRoot;
 

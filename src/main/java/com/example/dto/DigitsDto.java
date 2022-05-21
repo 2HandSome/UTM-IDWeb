@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DigitsDto {
+    private String nameOfDigit;
     private Double digit;
 }

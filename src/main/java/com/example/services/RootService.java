@@ -21,12 +21,17 @@ public class RootService {
     public void saveDigit(List<DigitsDto> values) {
         values.stream().forEach(
                 v -> {
-                    var byDigit = digitRepository.findByDigit(v.getDigit());
-                    var digit = new Digits();
-                    digit.setDigit(v.getDigit());
-                    if(isNull(byDigit)){
+                    var byDigit = digitRepository.findByNameOfDigit(v.getNameOfDigit());
+                    if (isNull(byDigit)) {
+                        var digit = new Digits();
+                        digit.setNameOfDigit(v.getNameOfDigit());
+                        digit.setDigit(v.getDigit());
                         digit.setDigitRoot(calculateRoot(v.getDigit()));
                         digitRepository.save(digit);
+                    } else if (byDigit.getDigit() != v.getDigit()) {
+                        byDigit.setDigit(v.getDigit());
+                        byDigit.setDigitRoot(calculateRoot(v.getDigit()));
+                        digitRepository.save(byDigit);
                     }
                 }
         );
