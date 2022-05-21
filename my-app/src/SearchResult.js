@@ -47,7 +47,6 @@ const SearchResult = () => {
         bordered
         sticky
     />)
-    // return "ok"
 }
 
 export default SearchResult;
