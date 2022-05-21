@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response {
+    private String nameOfDigit;
     private Double digit;
     private Double response;
 }

@@ -26,8 +26,12 @@ public class DigitController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllDigits() throws Exception {
+    public ResponseEntity<?> getAllDigits(){
+        return ok(rootService.all());
+    }
 
-        return ok("rootService.all()");
+    @GetMapping("/{name}")
+    public ResponseEntity<?> getAllDigits(@PathVariable("name") String name){
+        return ok(rootService.getByName(name));
     }
 }

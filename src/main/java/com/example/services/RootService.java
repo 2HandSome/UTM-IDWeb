@@ -1,12 +1,14 @@
 package com.example.services;
 
 import com.example.dto.DigitsDto;
+import com.example.dto.Response;
 import com.example.entity.repository.DigitRepository;
 import com.example.entity.Digits;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -19,7 +21,7 @@ public class RootService {
     private DigitRepository digitRepository;
 
     public void saveDigit(List<DigitsDto> values) {
-        values.stream().forEach(
+        values.forEach(
                 v -> {
                     var byDigit = digitRepository.findByNameOfDigit(v.getNameOfDigit());
                     if (isNull(byDigit)) {
@@ -37,10 +39,30 @@ public class RootService {
         );
     }
 
-    public DigitsDto all() {
-        return null;
+    public List<Response> all() {
+        var all = digitRepository.findAll();
+        List<Response> allDigits = new ArrayList<>();
+
+        all.forEach(d -> {
+            Response digits = new Response();
+            digits.setDigit(d.getDigit());
+            digits.setNameOfDigit(d.getNameOfDigit());
+            digits.setResponse(d.getDigitRoot());
+            allDigits.add(digits);
+        });
+        return allDigits;
     }
 
+    public Response getByName(String nameOfDigit) {
+        var digitByName = digitRepository.findByNameOfDigit(nameOfDigit);
+
+        Response digits = new Response();
+            digits.setDigit(digitByName.getDigit());
+            digits.setNameOfDigit(digitByName.getNameOfDigit());
+            digits.setResponse(digitByName.getDigitRoot());
+
+        return digits;
+    }
     private Double calculateRoot(Double digit) {
         return Math.sqrt(digit);
     }
