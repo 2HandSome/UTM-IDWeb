@@ -1,5 +1,5 @@
-import {Form, Input, Col, Row, Button, notification} from 'antd';
-import {useState} from "react";
+import React, {useEffect, useState} from 'react';
+import {Form, Row, Col, Input, Button, notification} from 'antd';
 import axios from "axios"
 import {SmileOutlined} from '@ant-design/icons';
 
@@ -8,6 +8,10 @@ const WrappedAdvancedSearchForm = () => {
     const [formValueB, setFormValueB] = useState({});
     const [formValueC, setFormValueC] = useState({});
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        form.validateFields();
+    }, [formValueA, formValueB, formValueC]);
 
     const saveDigits = () => {
         const request = []
@@ -22,12 +26,22 @@ const WrappedAdvancedSearchForm = () => {
             })
         })
     }
+
     return (
         <Form form={form}
+              name="advanced_search"
               className="ant-advanced-search-form">
             <Row gutter={24}>
                 <Col span={8} key={1}>
-                    <Form.Item label={`Digit A`}>
+                    <Form.Item
+                        label={`Digit A`}
+                        name={'Digit A'}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Input digits!',
+                            },
+                        ]}>
                         <Input placeholder="placeholder" onChange={(event) => {
                             setFormValueA({
                                 nameOfDigit: "A",
@@ -37,8 +51,16 @@ const WrappedAdvancedSearchForm = () => {
                     </Form.Item>
                 </Col>
                 <Col span={8} key={2}>
-                    <Form.Item label={`Digit B`}>
-                        <Input placeholder="placeholder" onChange={(event) => {
+                    <Form.Item
+                        label={`Digit B`}
+                        name={`Digit B`}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Input digits!',
+                            },
+                        ]}>
+                        < Input placeholder="placeholder" onChange={(event) => {
                             setFormValueB({
                                 nameOfDigit: "B",
                                 digit: event.target.value
@@ -47,7 +69,15 @@ const WrappedAdvancedSearchForm = () => {
                     </Form.Item>
                 </Col>
                 <Col span={8} key={3}>
-                    <Form.Item label={`Digit C`}>
+                    <Form.Item
+                        label={`Digit C`}
+                        name={`Digit C`}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Input digits!',
+                            },
+                        ]}>
                         <Input placeholder="placeholder" onChange={(event) => {
                             setFormValueC({
                                 nameOfDigit: "C",
@@ -64,7 +94,9 @@ const WrappedAdvancedSearchForm = () => {
                     </Button>
                     <Button
                         style={{marginLeft: 8}}
-                        onClick={() => form.resetFields()}>
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
                         Clear
                     </Button>
                 </Col>
