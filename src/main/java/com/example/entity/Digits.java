@@ -12,15 +12,9 @@ import javax.persistence.*;
 public class Digits {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    private Double digit;
+    private Double digitRoot;
 
-    private Double digitA;
-    private Double digitB;
-    private Double digitC;
-
-    @OneToOne
-    @JoinColumn(name = "digit_value_id")
-    @EqualsAndHashCode.Exclude
-    private DigitValues digitValues;
 }
