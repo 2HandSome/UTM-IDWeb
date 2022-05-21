@@ -13,6 +13,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController()
 @RequestMapping("digit")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DigitController {
 
     @Autowired
